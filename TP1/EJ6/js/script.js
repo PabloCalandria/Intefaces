@@ -9,7 +9,7 @@ let imageData = ctx.createImageData(width, height);
 //Amarillo: 255 , 255 , 0
 //Rojo: 255 , 0 , 0
 
-let r;
+/*let r;
 let g;
 let b = 0;
 for (let x = 0; x < width; x++) {
@@ -24,27 +24,26 @@ for (let x = 0; x < width; x++) {
             g = 510 - (255 / (width / 2) * x);
         }
     }
-}
+}*/
 
 //OTRA FORMA DE HACERLO, ES SUMANDO DE A UNO EL RGB 
-/*let r = 0;
+let r = 255;
 let g = 0;
 let b = 0;
 for (let x = 0; x < width; x++) {
     for (let y = 0; y < height; y++) {
         setPixel(imageData, x, y, r, g, b, 255);
     }
-    if(x <= width / 2){
-        r += 1;
+    if(x <= width / 4){
         g += 1;
         b -= 1;
     }
     else{
-        r += 1;
-        g -= 1;
-        b -= 1;
+        r -= 1;
+        g += 1;
+        b += 1;
     }
-}*/
+}
 
 ctx.putImageData(imageData, 0, 0);
 
