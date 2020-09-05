@@ -3,12 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio6</title>
+    <title>Paint</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <canvas id="myCanvas" width="1300" height="400" style="border:1px solid #d3d3d3;">
-        Your browser does not support the canvas element.
-    </canvas>
+    <h1>Paint</h1>
+    <button id="btnLapiz">Lapiz</button>
+    <select id="selectLapiz">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+    </select>
+    <button id="btnGoma">Goma</button>
+    <select id="selectGoma">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+    </select>
+    <div class="paint">
+        <canvas id="myCanvas" width="700" height="400" style="border:1px solid #d3d3d3;">
+            Your browser does not support the canvas element.
+        </canvas>
+    </div>
     <script src="js/script.js"></script>
 </body>
 </html>
