@@ -8,18 +8,35 @@
 </head>
 <body>
     <h1>Paint</h1>
+
+    <input type="file" id="inpImagen" name="Cargar">
+
+    <button id="btnBlanco">Nuevo</button>
+    Filtros:<select id="selectFiltros">
+        <option value="negativo">Negativo</option>
+        <option value="brillo">Brillo</option>
+        <option value="sepia">Sepia</option>
+        <option value="binario">Binario</option>
+    </select>
+    Brillo: <input type="range" id="inpBrillo">
+    <button id="btnFiltro">Agregar</button>
+    <button id="btnQuitarFiltro">Quitar</button>
+
     <button id="btnLapiz">Lapiz</button>
+    <input type="color" id="inpColor">
     <select id="selectLapiz">
         <option value="5">5</option>
         <option value="10">10</option>
         <option value="15">15</option>
     </select>
+
     <button id="btnGoma">Goma</button>
     <select id="selectGoma">
         <option value="5">5</option>
         <option value="10">10</option>
         <option value="15">15</option>
     </select>
+
     <div class="paint">
         <canvas id="myCanvas" width="700" height="400" style="border:1px solid #d3d3d3;">
             Your browser does not support the canvas element.
