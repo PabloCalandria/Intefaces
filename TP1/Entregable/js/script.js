@@ -73,10 +73,19 @@ function cargarPagina(){
 
                     let imageData = context.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
 
+                    imageOrigin = ctx.getImageData(0,0,canvas.width,canvas.height);
                     context.putImageData(imageData, 0, 0);
                 }
             }
         }
+    }
+
+    function guardarCambios(){
+            let link = document.querySelector("#descarga");
+            let filename = prompt("Guardar como...", "Nombre del archivo");
+            filename = filename + ".jpg";
+            link.href = document.querySelector("#myCanvas").toDataURL("image/jpg");
+            link.download = filename;
     }
 
     function enBlanco(){
@@ -86,34 +95,32 @@ function cargarPagina(){
     }
 
     function quitarFiltro(){
-        if(imageOrigin != null)
-            ctx.putImageData(imageOrigin,0,0);
-    }
-
-    
-    function getRed(imageData, x, y){
-        let index = (x + y * imageData.width) * 4;
-        return imageData.data[index+0];
-    }
-
-    function getGreen(imageData, x, y){
-        let index = (x + y * imageData.width) * 4;
-        return imageData.data[index+1];
-    }
-
-    function getBlue(imageData, x, y){
-        let index = (x + y * imageData.width) * 4;
-        return imageData.data[index+2];
+        ctx.putImageData(imageOrigin,0,0);
     }
 
     function agregarFiltro(){
+        quitarFiltro();
         let opcion = document.querySelector("#selectFiltros").value;
 
         let canvas = document.querySelector("#myCanvas");
         let index;
-        imageOrigin = ctx.getImageData(0,0,canvas.width,canvas.height);
         let imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
 
+        function getRed(imageData, x, y){
+            let index = (x + y * imageData.width) * 4;
+            return imageData.data[index+0];
+        }
+
+        function getGreen(imageData, x, y){
+            let index = (x + y * imageData.width) * 4;
+            return imageData.data[index+1];
+        }
+
+        function getBlue(imageData, x, y){
+            let index = (x + y * imageData.width) * 4;
+            return imageData.data[index+2];
+        }
+        
         if(opcion == "negativo"){
             for(let y = 0; y < canvas.height; y++){
                 for(let x = 0; x < canvas.width; x++){
@@ -174,6 +181,67 @@ function cargarPagina(){
         }
 
         if(opcion == "binario"){
+            binario();
+            ctx.putImageData(imageData,0,0);              
+        }
+
+        if(opcion == "blur"){
+            for (let x = 1; x < imageData.width-1; x++) {
+                for (let y = 1; y < imageData.height-1; y++) {
+                    promedioMatriz(x, y, imageData);
+                }
+            }
+
+            function promedioMatriz(x, y, imageData){
+                let r = 0;
+                let b = 0;
+                let g = 0;
+                
+                r = (getRed(imageData, x-1, y-1) + getRed(imageData, x, y-1) + getRed(imageData, x+1, y-1)
+                + getRed(imageData, x-1, y) + getRed(imageData, x, y) + getRed(imageData, x+1, y)
+                + getRed(imageData, x-1, y+1) + getRed(imageData, x, y+1) + getRed(imageData, x+1, y+1))/9;
+    
+                g = (getGreen(imageData, x-1, y-1) + getGreen(imageData, x, y-1)+ getGreen(imageData, x+1, y-1) 
+                +   getGreen(imageData, x-1, y) + getGreen(imageData, x, y) + getGreen(imageData, x+1, y)
+                +   getGreen(imageData, x-1, y+1) + getGreen(imageData, x, y+1) + getGreen(imageData, x+1, y+1))/9;
+        
+                b = (getBlue(imageData, x-1, y-1) + getBlue(imageData, x, y-1) + getBlue(imageData, x+1, y-1)  
+                +   getBlue(imageData, x-1, y) + getBlue(imageData, x, y) + getBlue(imageData, x+1, y+1)  
+                +   getBlue(imageData, x-1, y+1) + getBlue(imageData, x, y+1) + getBlue(imageData, x+1, y+1))/9;
+        
+                let index = (x + y * imageData.width) * 4;
+                imageData.data[index + 0] = r;
+                imageData.data[index + 1] = g;
+                imageData.data[index + 2] = b;
+            }
+    
+            ctx.putImageData(imageData, 0, 0);
+        }
+
+        if(opcion == "deteccionBordes"){
+            binario();
+            let vertical = [-1, 0, 1,
+                            -2, 0, 2,
+                            -1, 0, 1];
+            let horizontal = [-1, -2, -1,
+                              0, 0, 0,
+                            1, 2, 1];
+            let v;
+            let h;
+            for (let x = 0; x < imageData.width; x+=4) {
+                v = Math.abs(vertical);
+                h = Math.abs(horizontal);
+
+                imageData.data[x] = v;
+                imageData.data[x+1] = h;
+                imageData.data[x+2] = (v+h)/4;
+                imageData.data[x+3] = 255;
+            
+            }
+            ctx.putImageData(imageData, 0, 0);
+        }
+
+        function binario(){
             let r;
             let b;
             let g;
@@ -192,7 +260,6 @@ function cargarPagina(){
                     imageData.data[index+2] = promedio;
                 }
             }
-            ctx.putImageData(imageData,0,0);
         }
     }
 
@@ -201,8 +268,12 @@ function cargarPagina(){
     let botonGoma = document.querySelector("#btnGoma");
     botonGoma.addEventListener("click", function(e){paint("goma")});
 
-    let botonCargarImagen = document.querySelector("#inpImagen");
-    botonCargarImagen.addEventListener("click", cargaImagen);
+    let botonGuardar = document.querySelector("#btnGuardar");
+    botonGuardar.addEventListener("click", guardarCambios);
+
+    let botonCargarImagen = document.querySelector("#btnCargar");
+    botonCargarImagen.addEventListener("click", function(e){document.querySelector("#inpImagen").click();
+                                                            cargaImagen();});
 
     let botonBlanco = document.querySelector("#btnBlanco");
     botonBlanco.addEventListener("click", enBlanco);

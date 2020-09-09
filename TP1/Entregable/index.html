@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paint</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+
     <h1>Paint</h1>
 
-    <input type="file" id="inpImagen" name="Cargar">
+    <button id="btnCargar">Imagen</button>
+    <input type="file" id="inpImagen" style="display: none;">
 
-    <button id="btnBlanco">Nuevo</button>
+
+
+    <a id="descarga" download><button id="btnGuardar">Guardar</button></a>
+    <button id="btnBlanco" class="btn btn-outline-dark">Nuevo</button>
+
     Filtros:<select id="selectFiltros">
         <option value="negativo">Negativo</option>
         <option value="brillo">Brillo</option>
         <option value="sepia">Sepia</option>
         <option value="binario">Binario</option>
+        <option value="blur">Blur</option>
+        <option value="deteccionBordes">Detector de bordes</option>
     </select>
     Brillo: <input type="range" id="inpBrillo">
     <button id="btnFiltro">Agregar</button>
     <button id="btnQuitarFiltro">Quitar</button>
+
 
     <button id="btnLapiz">Lapiz</button>
     <input type="color" id="inpColor">
@@ -37,11 +48,13 @@
         <option value="15">15</option>
     </select>
 
-    <div class="paint">
-        <canvas id="myCanvas" width="700" height="400" style="border:1px solid #d3d3d3;">
-            Your browser does not support the canvas element.
-        </canvas>
-    </div>
+    <canvas id="myCanvas" width="700" height="400" style="border:1px solid #d3d3d3;">
+        Your browser does not support the canvas element.
+    </canvas>
+
+
     <script src="js/script.js"></script>
+
 </body>
+
 </html>
