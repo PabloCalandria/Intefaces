@@ -13,6 +13,8 @@ function cargarPagina(){
         let pintar = Boolean(false);
         let color_prim = document.querySelector("#inpColor").value;
         
+        let canvas = document.querySelector("#myCanvas");
+
         c.onmousedown = function (e){
             pintar = true;
             if( herramienta == "lapiz" ){
@@ -37,6 +39,7 @@ function cargarPagina(){
                     ctx.beginPath();
                     ctx.clearRect(e.pageX - c.offsetLeft, e.pageY - c.offsetTop,tamanoGoma,tamanoGoma);
                 }
+                imageOrigin = ctx.getImageData(0,0,canvas.width,canvas.height);
             }
         }
         
@@ -181,7 +184,31 @@ function cargarPagina(){
         }
 
         if(opcion == "binario"){
-            binario();
+            let r;
+            let b;
+            let g;
+            for(let y = 0; y < canvas.height; y++){
+                for(let x = 0; x < canvas.width; x++){
+                    index = (x + y * imageData.width) * 4;
+                    
+                    r = getRed(imageData,x,y);
+                    g = getGreen(imageData,x,y);
+                    b = getBlue(imageData,x,y);
+                    
+                    let promedio = (r+g+b)/3;
+
+                    if(promedio > 127){
+                        imageData.data[index+0] = 0;
+                        imageData.data[index+1] = 0;
+                        imageData.data[index+2] = 0;
+                    }
+                    else{
+                        imageData.data[index+0] = 255;
+                        imageData.data[index+1] = 255;
+                        imageData.data[index+2] = 255;
+                    }
+                }
+            }
             ctx.putImageData(imageData,0,0);              
         }
 
@@ -218,47 +245,70 @@ function cargarPagina(){
             ctx.putImageData(imageData, 0, 0);
         }
 
-        if(opcion == "deteccionBordes"){
-            binario();
-            let vertical = [-1, 0, 1,
-                            -2, 0, 2,
-                            -1, 0, 1];
-            let horizontal = [-1, -2, -1,
-                              0, 0, 0,
-                            1, 2, 1];
-            let v;
-            let h;
-            for (let x = 0; x < imageData.width; x+=4) {
-                v = Math.abs(vertical);
-                h = Math.abs(horizontal);
+        if(opcion == "saturacion"){
+            let saturacion = document.querySelector("#inpSaturacion").value;
 
-                imageData.data[x] = v;
-                imageData.data[x+1] = h;
-                imageData.data[x+2] = (v+h)/4;
-                imageData.data[x+3] = 255;
-            
+            for (let x = 0; x < imageData.width; x++) {
+                    for (let y = 0; y < imageData.height; y++) {
+                        index = (x + y * imageData.width) * 4;
+                        let r = getRed(imageData, x, y);
+                        let g = getGreen(imageData, x, y);
+                        let b = getBlue(imageData, x, y);
+                        let a = rgbToHsl(r, g, b);
+                        a[1] = 2;
+                        let p = hslToRgb(a[0],a[1],a[2]);
+                        imageData.data[index + 0] = p[0]; 
+                        imageData.data[index + 1] = p[1]; 
+                        imageData.data[index + 2] = p[2]; 
+                    }
             }
+
             ctx.putImageData(imageData, 0, 0);
-        }
 
-        function binario(){
-            let r;
-            let b;
-            let g;
-            for(let y = 0; y < canvas.height; y++){
-                for(let x = 0; x < canvas.width; x++){
-                    index = (x + y * imageData.width) * 4;
-                    
-                    r = getRed(imageData,x,y);
-                    g = getGreen(imageData,x,y);
-                    b = getBlue(imageData,x,y);
-                    
-                    let promedio = (r+g+b)/3;
-
-                    imageData.data[index+0] = promedio;
-                    imageData.data[index+1] = promedio;
-                    imageData.data[index+2] = promedio;
+            function rgbToHsl(r, g, b) {
+                r /= 255, g /= 255, b /= 255;
+        
+                let max = Math.max(r, g, b), min = Math.min(r, g, b);
+                let h, s, l = (max + min) / 2;
+        
+                if (max == min) {
+                        h = s = 0;
+                } else {
+                        let d = max - min;
+                        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                        switch (max) {
+                                case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                                case g: h = (b - r) / d + 2; break;
+                                case b: h = (r - g) / d + 4; break;
+                        }
+                        h /= 6;
                 }
+                return [h, s, l];
+            }
+
+            function hslToRgb(h, s, l) {
+                let r, g, b;
+        
+                if (s == 0) {
+                        r = g = b = l; // achromatic
+                } else {
+                        function hue2rgb(p, q, t) {
+                                if (t < 0) t += 1;
+                                if (t > 1) t -= 1;
+                                if (t < 1 / 6) return p + (q - p) * 6 * t;
+                                if (t < 1 / 2) return q;
+                                if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+                                return p;
+                        }
+        
+                        let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                        let p = 2 * l - q;
+        
+                        r = hue2rgb(p, q, h + 1 / 3);
+                        g = hue2rgb(p, q, h);
+                        b = hue2rgb(p, q, h - 1 / 3);
+                }
+                return [r * 255, g * 255, b * 255];
             }
         }
     }
