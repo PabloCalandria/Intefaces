@@ -72,6 +72,14 @@ function cargarPagina(){
                     let imageScaledWidth = canvas.width;
                     let imageScaledHeight = canvas.height;
                 
+                    
+                    let imageAspectRatio = (1.0 * this.height) / this.width;
+                    if (this.width < this.height) {
+                        imageAspectRatio = (1.0 * this.width) / this.height;
+                        imageScaledWidth = canvas.height * imageAspectRatio;
+                        imageScaledHeight = canvas.height;
+                    }
+
                     context.drawImage(this, 0, 0, imageScaledWidth, imageScaledHeight);
 
                     let imageData = context.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
@@ -246,8 +254,7 @@ function cargarPagina(){
         }
 
         if(opcion == "saturacion"){
-            let saturacion = document.querySelector("#inpSaturacion").value;
-
+            
             for (let x = 0; x < imageData.width; x++) {
                     for (let y = 0; y < imageData.height; y++) {
                         index = (x + y * imageData.width) * 4;
@@ -290,7 +297,7 @@ function cargarPagina(){
                 let r, g, b;
         
                 if (s == 0) {
-                        r = g = b = l; // achromatic
+                        r = g = b = l;
                 } else {
                         function hue2rgb(p, q, t) {
                                 if (t < 0) t += 1;
@@ -328,8 +335,7 @@ function cargarPagina(){
     let botonBlanco = document.querySelector("#btnBlanco");
     botonBlanco.addEventListener("click", enBlanco);
 
-    let botonFiltro = document.querySelector("#btnFiltro");
-    botonFiltro.addEventListener("click", agregarFiltro);
+    document.querySelector("#selectFiltros").addEventListener("change", agregarFiltro);
 
     let botonQuitarFiltro = document.querySelector("#btnQuitarFiltro");
     botonQuitarFiltro.addEventListener("click", quitarFiltro);

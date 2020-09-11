@@ -1,12 +1,17 @@
 h1{
-    
-    
+    text-shadow: 5px 5px 5px #555555;
+    font-family: cursive;
+    color: black;
 }
 
-.paint{
-    
+.funciones{
+    padding: 10px;
 }
 
-.filtros{
-    
+.filtro{
+    padding: 10px;
+}
+
+.herramientas{
+    padding: 10px;
 }
