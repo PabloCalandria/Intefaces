@@ -12,7 +12,11 @@ function cargarPagina(){
         let tamanoGoma = document.querySelector("#selectGoma").value;
         let pintar = Boolean(false);
         let color_prim = document.querySelector("#inpColor").value;
-        
+        if(tamanoLapiz == 0)
+            tamanoLapiz = 0.5;
+        if(tamanoGoma == 0)
+            tamanoGoma = 0.5;
+
         let canvas = document.querySelector("#myCanvas");
 
         c.onmousedown = function (e){
