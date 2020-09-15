@@ -42,8 +42,10 @@ function cargarPagina(){
                     tamanoGoma = document.querySelector("#selectGoma").value;
                     if(tamanoGoma == 0)
                         tamanoGoma = 0.5;
-                    ctx.beginPath();
-                    ctx.clearRect(e.pageX - c.offsetLeft, e.pageY - c.offsetTop,tamanoGoma,tamanoGoma);
+                    ctx.lineTo(e.pageX - c.offsetLeft, e.pageY - c.offsetTop);
+                    ctx.lineWidth = tamanoGoma;
+                    ctx.strokeStyle = "#FFFFFF";
+                    ctx.stroke();
                 }
                 imageOrigin = ctx.getImageData(0,0,canvas.width,canvas.height);
             }
@@ -147,29 +149,6 @@ function cargarPagina(){
                     imageData.data[index+2] = 255 - imageData.data[index+2];      
                 }
             }
-            ctx.putImageData(imageData,0,0);
-        }
-
-        if(opcion == "brillo"){
-            let densidad = document.querySelector("#inpBrillo").value;
-            for(let y = 0; y < canvas.height; y++){
-                for(let x = 0; x < canvas.width; x++){
-                    index = (x + y * imageData.width) * 4;
-                    imageData.data[index+0] = getBrillo(imageData.data[index+0]+densidad);
-                    imageData.data[index+1] = getBrillo(imageData.data[index+1]+densidad);
-                    imageData.data[index+2] = getBrillo(imageData.data[index+2]+densidad);      
-                }
-            }
-
-            function getBrillo(valor){
-                if(valor<0)
-                    return 0;
-                if(valor>255)
-                    return 255;
-                else
-                    return valor;
-            }
-
             ctx.putImageData(imageData,0,0);
         }
 
@@ -326,6 +305,35 @@ function cargarPagina(){
         }
     }
 
+    function brillo(){
+        ctx.putImageData(imageOrigin,0,0);
+        let canvas = document.querySelector("#myCanvas");
+        let densidad;
+        let index;
+        let imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
+
+        for(let y = 0; y < canvas.height; y++){
+            for(let x = 0; x < canvas.width; x++){
+                index = (x + y * imageData.width) * 4;
+                densidad =  (document.querySelector("#inpBrillo").value)/0.5;
+                imageData.data[index+0] = getBrillo(imageData.data[index+0] + densidad);
+                imageData.data[index+1] = getBrillo(imageData.data[index+1] + densidad);
+                imageData.data[index+2] = getBrillo(imageData.data[index+2] + densidad);      
+            }
+        }
+
+        function getBrillo(valor){
+            if(valor<0)
+                return 0;
+            if(valor>255)
+                return 255;
+            else
+                return valor;
+        }
+
+        ctx.putImageData(imageData,0,0);
+    }
+
     let botonLapiz = document.querySelector("#btnLapiz");
     botonLapiz.addEventListener("click", function(e){paint("lapiz")});
     let botonGoma = document.querySelector("#btnGoma");
@@ -342,6 +350,7 @@ function cargarPagina(){
     botonBlanco.addEventListener("click", enBlanco);
 
     document.querySelector("#selectFiltros").addEventListener("change", agregarFiltro);
+    document.querySelector("#inpBrillo").addEventListener("change", brillo);
 
     let botonQuitarFiltro = document.querySelector("#btnQuitarFiltro");
     botonQuitarFiltro.addEventListener("click", quitarFiltro);
