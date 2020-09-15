@@ -4,24 +4,23 @@ function cargarPagina(){
     
     let ctx = document.querySelector("#myCanvas").getContext("2d");    
     let imageOrigin = null;
+    let tamanoLapiz;
+    let tamanoGoma;
     
     function paint(herramienta){
         
         let c = document.querySelector("#myCanvas");        
-        let tamanoLapiz = document.querySelector("#selectLapiz").value;
-        let tamanoGoma = document.querySelector("#selectGoma").value;
         let pintar = Boolean(false);
         let color_prim = document.querySelector("#inpColor").value;
-        if(tamanoLapiz == 0)
-            tamanoLapiz = 0.5;
-        if(tamanoGoma == 0)
-            tamanoGoma = 0.5;
-
+        
         let canvas = document.querySelector("#myCanvas");
-
+        
         c.onmousedown = function (e){
             pintar = true;
-            if( herramienta == "lapiz" ){
+            if(herramienta == "lapiz" ){
+                tamanoLapiz = document.querySelector("#selectLapiz").value;
+                if(tamanoLapiz == 0)
+                    tamanoLapiz = 0.5;
                 ctx.moveTo(e.pageX - c.offsetLeft, e.pageY - c.offsetTop);
             }
         }   
@@ -40,6 +39,9 @@ function cargarPagina(){
                     ctx.stroke();
                 }
                 else if(herramienta == "goma"){
+                    tamanoGoma = document.querySelector("#selectGoma").value;
+                    if(tamanoGoma == 0)
+                        tamanoGoma = 0.5;
                     ctx.beginPath();
                     ctx.clearRect(e.pageX - c.offsetLeft, e.pageY - c.offsetTop,tamanoGoma,tamanoGoma);
                 }
