@@ -1,11 +1,11 @@
-class Circle extends Figure{
-
-    constructor(posX, posY, radius, fill, context){
+class Circle extends Figure {
+    constructor(posX, posY, radius, fill, context) {
         super(posX, posY, fill, context);
+
         this.radius = radius;
     }
 
-    draw(){
+    draw() {
         super.draw();
         this.context.beginPath();
         this.context.arc(this.posX, this.posY, this.radius, 0, 2 * Math.PI);
@@ -13,7 +13,7 @@ class Circle extends Figure{
         this.context.closePath();
     }
 
-    getRadius(){
+    getRadius() {
         return this.radius;
     }
 }

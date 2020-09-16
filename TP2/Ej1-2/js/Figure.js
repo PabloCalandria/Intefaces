@@ -1,36 +1,33 @@
-class Figure{
-
-    constructor(posX, posY, fill, context){
+class Figure {
+    constructor(posX, posY, fill, context) {
         this.posX = posX;
         this.posY = posY;
         this.fill = fill;
         this.context = context;
     }
 
-    setFill(fill){
+    setFill(fill) {
         this.fill = fill;
     }
 
-    getPosition(){
-        return{
+    getPosition() {
+        return {
             x: this.getPosX(),
             y: this.getPosY()
-        }
+        };
     }
 
-    getPosX(){
+    getPosX() {
         return this.posX;
     }
-
-    getPosY(){
+    getPosY() {
         return this.posY;
     }
-
-    getFill(){
+    getFill() {
         return this.fill;
     }
 
-    draw(){
+    draw() {
         this.context.fillStyle = this.fill;
     }
 }
