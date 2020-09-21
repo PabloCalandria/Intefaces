@@ -1,4 +1,4 @@
-class Square {
+class Square{
     
     constructor(context, posX, posY) {
         this.context = context;
