@@ -74,12 +74,8 @@ function getOpcionColor(posX, posY){
     if(opcion == 2){
         let img = new Image();
         img.src = "./images/ficha.jpg";
-        img.onload = function(){
-            img.width = 100;
-            img.height = 100;
-            let imagen = context.createPattern(img, "repeat");
-            return imagen;
-        }
+        let imagen = context.createPattern(img, "repeat");
+        return imagen;
     }
     
 }
