@@ -1,6 +1,6 @@
 class Figure {
     
-    constructor(posX, posY, radius, fill, context) {
+    constructor(posX, posY, radius, fill, context, img) {
         this.posX = posX;
         this.posY = posY;
         this.fill = fill;
@@ -8,6 +8,8 @@ class Figure {
         this.highlighted = false;
         this.highlightedStyle = "black";
         this.context = context;
+        this.img = img;
+        console.log(this.img);
     }
 
     setPosition(x, y){
@@ -39,10 +41,10 @@ class Figure {
     }
 
     draw() {
-        this.context.fillStyle = this.fill;        
-        this.context.beginPath();
-        this.context.arc(this.posX, this.posY, this.radius, 0, 2 * Math.PI);
-        this.context.fill();
+        this.context.fillStyle = this.fill;  
+        let imgSize = 70;
+        this.radius = imgSize / 2;
+        this.context.drawImage(this.img, this.posX - (imgSize / 2), this.posY - (imgSize / 2), imgSize, imgSize);
 
         if(this.highlighted === true){
             this.context.strokeStyle = this.highlightedStyle;

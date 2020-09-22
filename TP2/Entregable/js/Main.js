@@ -24,8 +24,14 @@ function comenzarJuego(){
         let posX = Math.random() * (200 - 70) + 70;
         let posY = Math.random() * (730 - 600) + 600; 
         let color = "red";
-        let circle = new Figure(posX, posY, 40, color, context);
+        let circle = new Figure(posX, posY, 50, color, context, getImg('images/ficha_roja.png'));
         figures.push(circle);
+    }
+
+    function getImg(src){
+        let img = new Image();
+        img.src = src;
+        return img;
     }
     
     function addFigureYellow() {
@@ -48,7 +54,7 @@ function comenzarJuego(){
                 i++
             }
         }
-        
+
         drawFigures();
         
         canvas.addEventListener("mousedown", onMouseDown, false);
@@ -56,12 +62,18 @@ function comenzarJuego(){
         canvas.addEventListener("mousemove", onMouseMoved, false);
     }
     
-    function drawFigures() {
+    function drawFigures(){
         clearCanvas();
         for (let i = 0; i < figures.length; i++) {
-            figures[i].draw(context);
+            if(figures[i] != lastClickedFigure) {
+                figures[i].draw();
+            }
         }
-    }  
+        if(lastClickedFigure != null) {
+            lastClickedFigure.draw();
+        }
+    }
+
     
     function clearCanvas() {
         context.fillStyle = '#F8F8FF';
@@ -73,7 +85,7 @@ function comenzarJuego(){
         for(let i = 0; i < figures.length; i++){
             const element = figures[i];
             if(element.isPointInside(x, y))
-            return element;
+                return element;
         }
     }
     
@@ -90,7 +102,7 @@ function comenzarJuego(){
             clickedFigure.setHighlighted(true);
             lastClickedFigure = clickedFigure;
         }
-        
+
         drawFigures();
     }
     

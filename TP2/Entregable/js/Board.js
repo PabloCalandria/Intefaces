@@ -1,8 +1,8 @@
 class Board {
 
     constructor(context) {
-        this.i = document.querySelector("#inpFila").value;
-        this.j = document.querySelector("#inpColumna").value;
+        this.j = document.querySelector("#inpFila").value;
+        this.i = document.querySelector("#inpColumna").value;
         this.context = context;
         this.board = [];
     }
@@ -22,6 +22,14 @@ class Board {
 
     getTamaño(){
         return this.i * this.j;
+    }
+
+    getFila(){
+        return this.i;
+    }
+
+    getColumna(){
+        return this.j;
     }
 
 }

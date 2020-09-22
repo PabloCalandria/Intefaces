@@ -14,7 +14,7 @@ class Square{
 
     addImage(posX, posY){
         let img = new Image();
-        img.src = "./images/casillero.png";
+        img.src = "./images/Casillero-Transparente.png";
         img.onload = function(){
             context.drawImage(img,posX,posY);
         }
