@@ -9,7 +9,6 @@ class Figure {
         this.highlightedStyle = "black";
         this.context = context;
         this.img = img;
-        console.log(this.img);
     }
 
     setPosition(x, y){
@@ -42,9 +41,9 @@ class Figure {
 
     draw() {
         this.context.fillStyle = this.fill;  
-        let imgSize = 70;
-        this.radius = imgSize / 2;
+        let imgSize = 90;
         this.context.drawImage(this.img, this.posX - (imgSize / 2), this.posY - (imgSize / 2), imgSize, imgSize);
+        this.radius = imgSize / 2;
 
         if(this.highlighted === true){
             this.context.strokeStyle = this.highlightedStyle;

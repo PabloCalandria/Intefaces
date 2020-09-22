@@ -6,6 +6,7 @@ let canvasHeight = canvas.height;
 //FIJARSE EL CLEAR CANVAS
 //FIJARSE RESETEAR EL CANVAS Y QUE NO QUEDE GUARDADO EL UTLIMO
 //ACOMODAR LAS FICHAS PARA QUE SE ADAPTE AL TABLERO
+//ACOMODAR CUANDO SE INICIA EL JUEGO POR PRIMERA VEZ, QUE APAREZCAN LAS FICHAS 
 
 function comenzarJuego(){
     
@@ -24,7 +25,7 @@ function comenzarJuego(){
         let posX = Math.random() * (200 - 70) + 70;
         let posY = Math.random() * (730 - 600) + 600; 
         let color = "red";
-        let circle = new Figure(posX, posY, 50, color, context, getImg('images/ficha_roja.png'));
+        let circle = new Figure(posX, posY, 50, color, context, getImg("images/ficha_roja.png"));
         figures.push(circle);
     }
 
@@ -39,7 +40,7 @@ function comenzarJuego(){
         let posX = Math.random() * (1230 - 1100) + 1100;
         let posY = Math.random() * (730 - 600) + 600; 
         let color = "yellow";
-        let circle = new Figure(posX, posY, 40, color, context);
+        let circle = new Figure(posX, posY, 40, color, context, getImg("images/ficha_amarilla.png"));
         figures.push(circle);
     }
     
