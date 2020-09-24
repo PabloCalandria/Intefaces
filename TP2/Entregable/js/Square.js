@@ -1,9 +1,10 @@
 class Square{
-    
+
     constructor(context, posX, posY) {
         this.context = context;
         this.posX = posX;
         this.posY = posY;
+        this.color = null;
     }
 
     draw() {
@@ -12,11 +13,31 @@ class Square{
         this.context.stroke();
     }
 
-    addImage(posX, posY){
+    getColor(){
+        return this.color;
+    }
+
+    addImage(posX, posY, src){
         let img = new Image();
-        img.src = "./images/Casillero-Transparente.png";
-        img.onload = function(){
-            context.drawImage(img,posX,posY);
-        }
+        img.src = src;
+        context.drawImage(img,posX,posY);
+    }
+
+    getPosX(){
+        return this.posX;
+    }
+
+    getPosY(){
+        return this.posY;
+    }
+
+    setImage(src){
+        let img = new Image();
+        img.src = src;
+        context.drawImage(img,this.getPosX(),this.getPosY());
+    }
+
+    setColor(color){
+        this.color = color;
     }
 }

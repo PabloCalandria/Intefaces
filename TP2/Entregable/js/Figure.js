@@ -1,6 +1,6 @@
 class Figure {
     
-    constructor(posX, posY, radius, fill, context, img) {
+    constructor(posX, posY, radius, fill, context, img, color) {
         this.posX = posX;
         this.posY = posY;
         this.fill = fill;
@@ -8,12 +8,17 @@ class Figure {
         this.highlighted = false;
         this.highlightedStyle = "black";
         this.context = context;
+        this.color = color;
         this.img = img;
     }
 
     setPosition(x, y){
         this.posX = x;
         this.posY = y;
+    }
+
+    getColor(){
+        return this.color;
     }
 
     getPosition() {
