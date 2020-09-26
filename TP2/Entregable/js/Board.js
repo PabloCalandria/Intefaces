@@ -7,20 +7,20 @@ class Board {
         this.board = [];
     }
 
-    createBoard(){
+    createBoard(img){
         for (let x = 0; x < this.j; x++) {
             this.board[x] = [];
             for(let y = 0; y < this.i; y++){
                 let posX = (x * 100) + 270;
                 let posY = (y * 100) + 90;
                 let square = new Square(this.context, posX, posY);
-                square.addImage(posX,posY,"./images/Casillero-Transparente.png");
+                square.addImage(posX,posY,img);
                 this.board[x][y] = square;
             }
         }
     }
 
-    imprimeBoard(){
+    imprimeBoard(TabT,TabA,TabR){
         for (let x = 0; x < this.j; x++) {
             for(let y = 0; y < this.i; y++){
                 let posX = (x * 100) + 270;
@@ -28,11 +28,11 @@ class Board {
                 let square = new Square(this.context, posX, posY);
                 let color = this.board[x][y];
                 if(color.getColor() == null)
-                    square.addImage(posX,posY,"./images/Casillero-Transparente.png");
+                    square.addImage(posX,posY,TabT);
                 if(color.getColor() == "rojo")
-                    square.addImage(posX,posY,"./images/tablero_ficha_roja.png");
+                    square.addImage(posX,posY,TabR);
                 if(color.getColor() == "amarillo")
-                    square.addImage(posX,posY,"./images/tablero_ficha_amarilla.png");
+                    square.addImage(posX,posY,TabA);
             }
         }
     }

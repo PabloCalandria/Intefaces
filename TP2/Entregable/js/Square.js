@@ -17,9 +17,7 @@ class Square{
         return this.color;
     }
 
-    addImage(posX, posY, src){
-        let img = new Image();
-        img.src = src;
+    addImage(posX, posY, img){
         context.drawImage(img,posX,posY);
     }
 
@@ -31,9 +29,7 @@ class Square{
         return this.posY;
     }
 
-    setImage(src){
-        let img = new Image();
-        img.src = src;
+    setImage(img){
         context.drawImage(img,this.getPosX(),this.getPosY());
     }
 
