@@ -271,7 +271,7 @@ imgCT.onload = function(){
                             c++;
                             f++;
                         }
-                        if(total >= 1){
+                        if(total >= 4){
                             ganador();
                         }
                     }
