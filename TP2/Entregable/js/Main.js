@@ -3,8 +3,6 @@ let context = canvas.getContext("2d");
 let canvasWidth = canvas.width;
 let canvasHeight = canvas.height;
 
-//INSERTAR UN CARTEL CUANDO UN JUGADOR GANA
-
 let lastClickedFigure = null;
 let isMouseDown = false;
 
@@ -273,20 +271,20 @@ imgCT.onload = function(){
                             c++;
                             f++;
                         }
-                        if(total >= 4){
+                        if(total >= 1){
                             ganador();
                         }
                     }
 
                     function ganador(){
                         context.fillStyle = "rgba(0,0,0,0.8)";
-                        context.fillRect(240,215,800,120);
+                        context.fillRect(350,215,600,100);
                         context.font = "100px Comic Sans MS";
                         if(jugador == "rojo")
                             context.fillStyle = "red";
                         else
                             context.fillStyle = "yellow";
-                        context.fillText("GANADOR: " + jugador, 250, 300);
+                        context.fillText("GANADOR", 400, 300);
                         jugador = "fin";
                     }
                 }
