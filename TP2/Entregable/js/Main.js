@@ -287,6 +287,12 @@ imgCT.onload = function(){
                         context.fillText("GANADOR", 400, 300);
                         jugador = "fin";
                     }
+
+                    function comenzar(){
+                        location.reload();
+                    }
+
+                    document.querySelector("#bntComenzar").addEventListener("click", comenzar);
                 }
             }
         }
