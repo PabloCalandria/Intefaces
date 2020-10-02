@@ -77,4 +77,16 @@ class Figure {
         this.highlightedStyle = style;
     }
 
+    posOriginal(){
+        if (this.color == "rojo") {
+            let posX = Math.random() * (200 - 70) + 70;
+            let posY = Math.random() * (530 - 400) + 300; 
+            this.setPosition(posX, posY);
+        } else {
+            let valor = (((board.getColumna() - 1) * 100) + 330) + 70;
+            let posX = Math.random() * ((valor + 150) - valor) + valor;
+            let posY = Math.random() * (530 - 400) + 300;
+            this.setPosition(posX, posY);
+        }
+    }
 }

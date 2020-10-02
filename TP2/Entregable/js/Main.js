@@ -1,34 +1,37 @@
 let canvas = document.querySelector("#canvas");
 let context = canvas.getContext("2d");
+
 let canvasWidth = canvas.width;
-let canvasHeight = canvas.height;
 
 let lastClickedFigure = null;
 let isMouseDown = false;
 
 let board = new Board(context);
-let tamañoTablero = board.getTamaño();
+canvas.height = board.getFila() * 120;
+let canvasHeight = canvas.height;
 
+let tamañoTablero = board.getTamaño();
+    
 let imgCT = new Image();
 imgCT.src = "./images/Casillero-Transparente.png";
 imgCT.onload = function(){
-
+    
     let imgFR = new Image();
     imgFR.src = "./images/ficha_roja.png";
     imgFR.onload = function(){
-
+        
         let imgFA = new Image();
         imgFA.src = "./images/ficha_amarilla.png";
         imgFA.onload = function(){
-
+            
             let imgTFA = new Image();
             imgTFA.src = "./images/tablero_ficha_amarilla.png";
             imgTFA.onload = function(){
-
+                
                 let imgTFR = new Image();
                 imgTFR.src = "./images/tablero_ficha_roja.png";
                 imgTFR.onload = function(){
-
+                    
                     board.createBoard(imgCT);
                     
                     let figures = [];
@@ -51,7 +54,7 @@ imgCT.onload = function(){
                     function addFigureRed() {
                         //x:70 - 200 <-> y:600 - 730
                         let posX = Math.random() * (200 - 70) + 70;
-                        let posY = Math.random() * (530 - 400) + 400; 
+                        let posY = Math.random() * (530 - 400) + 300; 
                         let color = "red";
                         let circle = new Figure(posX, posY, 50, color, context, imgFR, "rojo");
                         figures.push(circle);
@@ -61,7 +64,7 @@ imgCT.onload = function(){
                         //x:70 - 200 <-> y:600 - 730
                         let valor = (((board.getColumna() - 1) * 100) + 330) + 70;
                         let posX = Math.random() * ((valor + 150) - valor) + valor;
-                        let posY = Math.random() * (530 - 400) + 400; 
+                        let posY = Math.random() * (530 - 400) + 300; 
                         let color = "yellow";
                         let circle = new Figure(posX, posY, 40, color, context, imgFA, "amarillo");
                         figures.push(circle);
@@ -78,7 +81,6 @@ imgCT.onload = function(){
                                 i++
                             }
                         }
-                        
                         
                         drawFigures();
                         
@@ -99,22 +101,22 @@ imgCT.onload = function(){
                             if(lastClickedFigure != null) {
                                 lastClickedFigure.draw();
                             }
-
+                            
                             context.font = "25pt Verdana";
                             context.strokeStyle = "black";
                             context.lineWidth = 2;
                             context.strokeText("Turno", 10, 50);
-
+                            
                             context.font = "30px Comic Sans MS";
                             if(jugador == "rojo")
-                                context.fillStyle = "red";
+                            context.fillStyle = "red";
                             else
-                                context.fillStyle = "yellow";
+                            context.fillStyle = "yellow";
                             context.lineWidth = 2;
                             context.fillText(jugador, 10, 80);
                         }
                     }
-
+                    
                     function clearCanvas() {
                         context.fillStyle = '#F8F8FF';
                         context.fillRect(0, 0, canvasWidth, canvasHeight);
@@ -128,9 +130,9 @@ imgCT.onload = function(){
                                 fichaSelect = i;
                                 colorFicha = element.getColor();
                                 if(colorFicha == jugador)
-                                    return element;
+                                return element;
                                 else
-                                    return null;
+                                return null;
                             }
                         }
                     }
@@ -162,23 +164,26 @@ imgCT.onload = function(){
                     function onMouseUp(event){
                         isMouseDown = false;
                         if(lastClickedFigure != null){
-                            if((event.layerY > 35) && (event.layerY < 52)){
+                            let finalColumna = ((board.getColumna() - 1) * 100) + 330;
+                            if((event.layerY > 0) && (event.layerY < 90) && (event.layerX > 280) && (event.layerX < finalColumna + 20)){
                                 //300 la ficha en X siempre es fija - nunca cambia... cada 100 pasa a la siguiente columna
                                 //MOVER LA FICHA ENTRE SU VALOR Y -10 Y +10
-                                let finalColumna = ((board.getColumna() - 1) * 100) + 330;
-                                if((event.layerX > 310) && (event.layerX < finalColumna)){
+                                if((event.layerX > 280) && (event.layerX < finalColumna + 20)){
                                     let columnaJugada = 0;
-                                let posMouse = 330;
-                                while ((posMouse < finalColumna) && (posMouse < event.layerX)){
-                                    columnaJugada++;
-                                    posMouse += 100;
-                                }
-                                if(board.getSquare(columnaJugada,0).getColor() == null){
-                                    chequearJugada(columnaJugada);
-                                    cambiaJugador();
+                                    let posMouse = 330;
+                                    while ((posMouse < finalColumna) && (posMouse < event.layerX)){
+                                        columnaJugada++;
+                                        posMouse += 100;
+                                    }
+                                    if(board.getSquare(columnaJugada,0).getColor() == null){
+                                        chequearJugada(columnaJugada);
+                                        cambiaJugador();
                                     }
                                 } 
-                            }                        
+                            }
+                            else{
+                                lastClickedFigure.posOriginal();
+                            }
                             drawFigures();
                         }
                     }
@@ -275,23 +280,23 @@ imgCT.onload = function(){
                             ganador();
                         }
                     }
-
+                    
                     function ganador(){
                         context.fillStyle = "rgba(0,0,0,0.8)";
                         context.fillRect(350,215,600,100);
                         context.font = "100px Comic Sans MS";
                         if(jugador == "rojo")
-                            context.fillStyle = "red";
+                        context.fillStyle = "red";
                         else
-                            context.fillStyle = "yellow";
+                        context.fillStyle = "yellow";
                         context.fillText("GANADOR", 400, 300);
                         jugador = "fin";
                     }
-
+                    
                     function comenzar(){
                         location.reload();
                     }
-
+                    
                     document.querySelector("#bntComenzar").addEventListener("click", comenzar);
                 }
             }

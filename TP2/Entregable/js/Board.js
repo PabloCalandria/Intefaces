@@ -7,7 +7,18 @@ class Board {
         this.board = [];
     }
 
+    
+    createIndicador(){
+        let indicador = new Square(this.context, 75, 75);
+        let imgFlecha = new Image();
+        imgFlecha.src = "./images/flecha1.png";
+        for(let i = 0; i < this.j; i++){
+            indicador.addImage((i * 100) + 280, 5, imgFlecha);
+        }
+    }
+
     createBoard(img){
+        this.createIndicador(img);
         for (let x = 0; x < this.j; x++) {
             this.board[x] = [];
             for(let y = 0; y < this.i; y++){
@@ -21,6 +32,7 @@ class Board {
     }
 
     imprimeBoard(TabT,TabA,TabR){
+        this.createIndicador();
         for (let x = 0; x < this.j; x++) {
             for(let y = 0; y < this.i; y++){
                 let posX = (x * 100) + 270;
