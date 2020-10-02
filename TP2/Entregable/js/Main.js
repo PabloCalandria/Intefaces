@@ -5,13 +5,14 @@ let canvasWidth = canvas.width;
 
 let lastClickedFigure = null;
 let isMouseDown = false;
+let juego = 0;
 
 let board = new Board(context);
 canvas.height = board.getFila() * 120;
 let canvasHeight = canvas.height;
 
 let tamañoTablero = board.getTamaño();
-    
+
 let imgCT = new Image();
 imgCT.src = "./images/Casillero-Transparente.png";
 imgCT.onload = function(){
@@ -71,7 +72,6 @@ imgCT.onload = function(){
                     }
                     
                     function addFigures() {
-                        
                         let i = 0;
                         while(i < tamañoTablero){
                             addFigureRed();
@@ -124,6 +124,11 @@ imgCT.onload = function(){
                     }
                     
                     function findClickedFigure(x, y){
+                        juego = 1;
+
+                        if(juego != 0){
+                            document.querySelector("#bntComenzar").innerHTML = "Reiniciar";
+                        }
                         for(let i = 0; i < figures.length; i++){
                             const element = figures[i];
                             if(element.isPointInside(x, y)){
