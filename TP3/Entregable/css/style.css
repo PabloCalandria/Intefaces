@@ -1,0 +1,64 @@
+body, html {
+    height: 100%;
+}
+
+.hero{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background: url(../images/wallpaper.jpg) no-repeat 50% 50%;
+    background-attachment: fixed; /*Acompaña la imagen con el scroll*/
+    background-size: cover;
+    z-index: -9;
+  }
+
+.persona {
+    position: absolute;
+    width: 50%;
+    height: 50vh;
+    right: 30%;
+    top: 52.55%;
+    background: url(../images/kratos.png) no-repeat 50% 50%;
+    background-size: contain;
+    z-index: -3;
+}
+
+.nieve{
+    position: absolute;
+    width: 100%;
+    height: 100vh; 
+    background: url(../images/nieve.png);
+    mix-blend-mode: overlay;
+    background-attachment: fixed; /*Acompaña la imagen con el scroll*/
+    z-index: -4;
+    animation: moverY 30s infinite linear; 
+}
+
+@keyframes moverY{
+  0%{
+    background-position-y: -894px;
+  }
+
+  100%{
+    background-position-y: 0px; 
+  }
+}
+
+.humo{
+    position: absolute;
+    width: 100%;
+    height: 100vh; 
+    background: url(../images/humo4.png);
+    z-index: -1;
+    animation: moverX 50s infinite linear; 
+}
+  
+@keyframes moverX{
+  0%{
+    background-position-x: 0px;
+  }
+
+  100%{
+    background-position-x: -3929px; 
+  }
+}
