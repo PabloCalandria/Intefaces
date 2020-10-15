@@ -1,6 +1,21 @@
 "use strict"
 
 function cargaPagina(){
+
+    function stopLoading(){
+        let contenedor = document.querySelector("#contenedor_carga");
+        contenedor.style.visibility = "hidden";
+    }
+
+    function loading(){
+        let contenedor = document.querySelector("#contenedor_carga");
+        contenedor.style.visibility = "visible";
+        setTimeout(function(){
+            stopLoading();
+        }, 3000);
+    }
+    
+    loading();
     
     let end = new Date('12/17/2020 9:30 AM');
 
@@ -83,16 +98,24 @@ function cargaPagina(){
     let  menu = document.querySelector('.hamburger');
     menu.addEventListener('click', toggleMenu, false);
 
-    document.querySelector(".menuHome").addEventListener("click", function(){
+    document.querySelector(".menuHome").addEventListener("click", function(){            
+        loading();
+        document.querySelector( ".menuppal" ).classList.toggle("is_active");
+        document.querySelector( ".hamburger" ).classList.toggle("is-active");
         window.scroll(0, 660);
     });
-    document.querySelector(".menuCalendario").addEventListener("click", function(){
+    document.querySelector(".menuCalendario").addEventListener("click", function(){          
+        loading();
+        document.querySelector( ".menuppal" ).classList.toggle("is_active");
+        document.querySelector( ".hamburger" ).classList.toggle("is-active");       
         window.scroll(0, 1600);
     });
-    document.querySelector(".menuFormulario").addEventListener("click", function(){
+    document.querySelector(".menuFormulario").addEventListener("click", function(){  
+        loading();
+        document.querySelector( ".menuppal" ).classList.toggle("is_active");
+        document.querySelector( ".hamburger" ).classList.toggle("is-active");
         window.scroll(0, 2060);
     });
-
 
     let btn = document.querySelector('.buttonF');
     btn.addEventListener('click', () => {
@@ -101,4 +124,6 @@ function cargaPagina(){
     });
 }
 
+
 document.addEventListener("DOMContentLoaded", cargaPagina);
+

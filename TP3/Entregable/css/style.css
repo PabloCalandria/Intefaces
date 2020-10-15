@@ -2,7 +2,65 @@ body, html {
     height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/*INICIO LOADER*/
+
+#contenedor_carga{
+  visibility: hidden;
+  background-color: rgb(0, 0, 0);
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  -webkit-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+  z-index: 10000;
+}
+
+#carga{
+  border: 15px solid rgb(32, 31, 31);
+  border-top-color: #dd0202;
+  border-top-style: groove;
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+
+  -webkit-animation: girar 1.5s linear infinite;
+  -o-animation: girar 1.5s linear infinite;
+  animation: girar 1.5s linear infinite;
+}
+
+@keyframes girar{
+  from { transform: rotate(0deg);}
+  to { transform: rotate(360deg);}
+}
+
+/*FIN LOADER*/
+
 /* INICIO MENU HAMBURGUESA*/
+
+#contenedor_carga p{
+  position: relative;
+  top: 60%;
+  left: 1%;
+  padding: 0;
+  border: none;
+  color: wheat;
+  font-family: Verdadna, Arial, Helvetica;
+  font-size:2.5rem;
+  text-align:center;
+  font-weight:bold;
+}
 
 .hamburger{
     position:fixed;
@@ -638,7 +696,7 @@ label input:valid + .label-text {
     transform: translateY(-74px);
 }
 
-/* estilo de botón */
+/* estilo de botón de carga*/
 
 .buttonF{
     background-color: rgba(0,0,0,0.5);
@@ -685,3 +743,15 @@ label input:valid + .label-text {
   }
 
 /*FIN FORMULARIO*/
+
+footer{
+    text-align: center;
+    color: #9B9B9B;
+    background: black;
+    height: 10%;
+}
+
+footer p{
+    position: relative;
+    top: 25%;
+}
