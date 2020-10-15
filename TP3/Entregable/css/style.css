@@ -2,12 +2,142 @@ body, html {
     height: 100%;
 }
 
+/* INICIO MENU HAMBURGUESA*/
+
+.hamburger{
+    position:fixed;
+    background-color:transparent;
+    left:0;
+    top:0;
+    height:30px;
+    width:30px;
+    padding:20px 20px;
+    -webkit-transform:translate3d(0, 0, 0);
+    transform:translate3d(0, 0, 0);
+    -webkit-transition:-webkit-transform 0.25s cubic-bezier(0.05, 1.04, 0.72, 0.98);
+    transition:transform 0.25s cubic-bezier(0.05, 1.04, 0.72, 0.98);
+    z-index:1002;
+    cursor:pointer;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+}
+
+.hamburger.is-active{
+    background-color:none;
+}
+
+._layer{
+    background:white;
+    margin-bottom:4px;
+    border-radius:2px;
+    width:28px;
+    height:4px;
+    opacity:1;
+    -webkit-transform:translate3d(0, 0, 0);
+    transform:translate3d(0, 0, 0);
+    -webkit-transition:all 0.25s cubic-bezier(0.05, 1.04, 0.72, 0.98);
+    transition:all 0.25s cubic-bezier(0.05, 1.04, 0.72, 0.98);
+}
+
+.hamburger:hover .-top{
+    -webkit-transform:translateY(-100%);
+    -ms-transform:translateY(-100%);
+    transform:translateY(-100%);
+}
+
+.hamburger:hover .-bottom{
+    -webkit-transform:translateY(100%);
+    -ms-transform:translateY(100%);
+    transform:translateY(100%);
+}
+
+.hamburger.is-active .-top{
+    -webkit-transform:translateY(200%) rotate(45deg) !important;
+    -ms-transform:translateY(200%) rotate(45deg) !important;
+    transform:translateY(200%) rotate(45deg) !important;
+}
+
+.hamburger.is-active .-mid{
+	  opacity:0;
+}
+
+.hamburger.is-active .-bottom{
+    -webkit-transform:translateY(-200%) rotate(135deg) !important;
+    -ms-transform:translateY(-200%) rotate(135deg) !important;
+    transform:translateY(-200%) rotate(135deg) !important;
+}
+
+.menuppal.is_active{
+    transform: translate3d(0px, 0px, 0px);
+}
+
+.menuppal{
+    background-color: rgba(0, 0, 0, 0.87);
+    bottom: 0;
+    height: 90%;
+    left: 0;
+    overflow-y: scroll;
+    position: fixed;
+    top: 0;
+    transform: translate3d(0px, -100%, 0px);
+    transition: transform 0.35s cubic-bezier(0.05, 1.04, 0.72, 0.98) 0s;
+    width: 100%;
+    z-index: 1001;
+}
+
+.menuppal ul{
+    margin:0;padding:0;
+}
+
+.menuppal ul li { 
+    list-style: none;
+    text-align:center;
+    font-family: Verdadna, Arial, Helvetica;
+    font-size:1.5rem;
+    line-height:3em;
+    height:3em;
+    color:#369;
+    text-transform:none;
+    font-weight:bold;
+}
+
+.menuppal ul li a{
+    text-decoration:none;
+    color:white;
+}
+
+.menuHome, .menuCalendario, .menuFormulario{
+    padding: 0;
+    border: none;
+    background: none;
+    color:white;
+    font-family: Verdadna, Arial, Helvetica;
+    font-size:1.5rem;
+    font-weight:bold;
+    line-height:3em;
+    height:3em;
+}
+
+.menuHome:hover, .menuCalendario:hover, .menuFormulario:hover{
+  text-decoration:none;
+  color:#333;
+}
+
+.menuppal ul li a:hover{
+    text-decoration:none;
+    color:#333;
+}
+
+/* FIN MENU HAMBURGUESA*/
+
 .hero{
     width: 100%;
     height: 100vh;
     position: absolute;
-    background: url(../images/wallpaper.jpg) no-repeat 50% 50%;
-    background-attachment: fixed; /*Acompaña la imagen con el scroll*/
+    background-image: url(../images/wallpaper.jpg);
+    background-attachment: fixed; 
     background-size: cover;
     z-index: -9;
   }
@@ -27,9 +157,9 @@ body, html {
     position: absolute;
     width: 100%;
     height: 100vh; 
-    background: url(../images/nieve.png);
+    background-image: url(../images/nieve.png);
     mix-blend-mode: overlay;
-    background-attachment: fixed; /*Acompaña la imagen con el scroll*/
+    background-attachment: fixed;
     z-index: -4;
     animation: moverY 30s infinite linear; 
 }
@@ -45,10 +175,9 @@ body, html {
 }
 
 .humo{
-    position: absolute;
     width: 100%;
     height: 100vh; 
-    background: url(../images/humo4.png);
+    background-image: url(../images/humo4.png);
     z-index: -1;
     animation: moverX 50s infinite linear; 
 }
@@ -62,3 +191,497 @@ body, html {
     background-position-x: -3929px; 
   }
 }
+
+.coutdown{
+    height: 50%;
+    background: url(../images/logo.png) no-repeat 45% 20%;
+    background-color: black;
+}
+
+.p1 {
+  color: azure;
+  width: 70%;
+  margin: 0 auto;
+  padding: 170px 0;
+  font-family: serif;
+  font-size: 5mm;
+  background: url(../images/sangre.png) no-repeat 0% 5%;
+  background-size: 25%;
+}
+
+.clock{
+    position: relative;
+    left: 30%;
+    color: #df2c04;
+	  text-shadow: -1px 1px #a09c9b, 2px 2px #3d3b3a;
+}
+
+.grilla{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background-image: url(../images/olimpo2.jpg);
+    background-attachment: fixed; 
+    background-size: cover;
+}
+
+.kratos{
+    top: 5%;
+    background-size: contain;
+    transition: all ease 1250ms;
+}
+
+.kratos:hover{
+  transform: perspective(2000px) rotateX(0deg) rotateY(30deg) rotateZ(0deg) translateX(0px) translateY(-30px) translateZ(0px);
+}
+
+.kratos > img{
+    width: 200%;
+    border-radius: 10% 10% 10% 10%;
+    box-shadow: 0 0 15px #ddd;
+}
+
+.zeus{
+    top: 5%;
+    background-size: contain;
+    transition: all ease 1250ms;
+}
+
+.zeus:hover{
+  transform: perspective(2000px) rotateX(0deg) rotateY(30deg) rotateZ(0deg) translateX(0px) translateY(-30px) translateZ(0px);
+}
+
+.zeus > img{
+  width: 200%;
+  border-radius: 10% 10% 10% 10%;
+  box-shadow: 0 0 15px #ddd;
+}
+
+.poseidon{
+    top: 5%;
+    background-size: contain;
+    transition: all ease 1250ms;
+}
+
+.poseidon:hover{
+  transform: perspective(2000px) rotateX(0deg) rotateY(30deg) rotateZ(0deg) translateX(0px) translateY(-30px) translateZ(0px);
+}
+
+.poseidon > img{
+  width: 200%;
+  border-radius: 10% 10% 10% 10%;
+  box-shadow: 0 0 15px #ddd;
+}
+
+.hades{
+    top: 5%;
+    height: 50%;
+    background-size: contain;
+    transition: all ease 1250ms;
+}
+
+.hades:hover{
+  transform: perspective(2000px) rotateX(0deg) rotateY(30deg) rotateZ(0deg) translateX(0px) translateY(-30px) translateZ(0px);
+}
+
+.hades > img{
+  width: 200%;
+  border-radius: 10% 10% 10% 10%;
+  box-shadow: 0 0 15px #ddd;
+}
+
+
+/*INICIO CARRUSEL*/
+
+
+.slideshow-container {
+  max-width: 600px;
+  position: relative;
+  left: 3%;
+  top: -10%;
+  margin: auto;
+  
+}
+
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.dot {
+  position: relative;
+  left: -550%;
+  top: 85%;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+
+/*FIN CARRUSEL*/
+
+
+/*INICIO ACORDEON*/
+.acordeon{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.acor {
+    padding: 0 18px;
+    background-color: #373c41;
+    color: wheat;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1s ease-out;
+}
+
+.imgGOW1{
+    background: url("../images/god of war 1.jpeg") no-repeat;    
+    background-size: contain;
+    position: relative;
+    left: 5%;
+    height:250px;
+    transition: all ease 1250ms;
+}
+
+.imgGOW1:hover{
+  transform: perspective(2000px) rotateX(30deg) rotateY(30deg) rotateZ(30deg) translateX(-30px) translateY(-30px) translateZ(-30px);
+}
+
+.imgGOW2{
+    background: url("../images/god of war 2.jpg") no-repeat;    
+    background-size: contain;
+    height:250px;
+    transition: all ease 1250ms;
+}
+
+.imgGOW2:hover{
+    transform: perspective(2000px) rotateX(30deg) rotateY(30deg) rotateZ(30deg) translateX(-30px) translateY(-30px) translateZ(-30px);
+}
+
+.imgGOW3{
+    background: url("../images/god of war 3.jpg") no-repeat;    
+    background-size: contain;
+    height:250px;
+    transition: all ease 1250ms;
+}
+
+.imgGOW3:hover{
+  transform: perspective(2000px) rotateX(30deg) rotateY(30deg) rotateZ(30deg) translateX(-30px) translateY(-30px) translateZ(-30px);
+}
+
+.imgGOW4{
+    background: url("../images/god of war 4.jpg") no-repeat;    
+    background-size: contain;
+    height:250px;
+    transition: all ease 1250ms;
+}
+
+.imgGOW4:hover{
+  transform: perspective(2000px) rotateX(30deg) rotateY(30deg) rotateZ(30deg) translateX(-30px) translateY(-30px) translateZ(-30px);
+}
+
+.imgPcRequisito{
+    background: url(../images/pc.png) no-repeat;    
+    background-size: contain;
+    height:150px;
+    position: relative;
+    right: -44%;
+    transition: all ease 1250ms;
+}
+
+.imgPcRequisito:hover{
+  transform: perspective(2000px) rotateX(0deg) rotateY(30deg) rotateZ(0deg) translateX(0px) translateY(30px) translateZ(0px);
+}
+
+.imgHistoria{
+    position: relative;
+    left: 28%;
+    background: url("../images/rayo.png") no-repeat;
+    background-size: contain;
+}
+
+
+.imgZeus{
+    background: url("../images/zeus.jpg") no-repeat;    
+    background-size: contain;
+    height:350px;
+    transition: all ease 1250ms;
+}
+
+.imgZeus:hover{
+  transform: perspective(2000px) rotateX(0deg) rotateY(30deg) rotateZ(0deg) translateX(0px) translateY(30px) translateZ(0px);
+}
+
+.imgPerses{
+    background: url("../images/perses.jpg") no-repeat;    
+    background-size: contain;
+    height:350px;
+    transition: all ease 1250ms;
+}
+
+.imgPerses:hover{
+  transform: perspective(2000px) rotateX(0deg) rotateY(30deg) rotateZ(0deg) translateX(0px) translateY(-30px) translateZ(0px);
+}
+
+.imgKratos{
+    background: url("../images/kratos.jpg") no-repeat;    
+    background-size: contain;
+    height:350px;
+    transition: all ease 1250ms;
+}
+
+.imgKratos:hover{
+  transform: perspective(2000px) rotateX(0deg) rotateY(30deg) rotateZ(0deg) translateX(0px) translateY(-30px) translateZ(0px);
+}
+
+.imgHermanasDelDestion{
+    background: url("../images/hermanas del destino.jpg") no-repeat;    
+    background-size: contain;
+    height:350px;
+    transition: all ease 1250ms;
+}
+
+.imgHermanasDelDestion:hover{
+  transform: perspective(2000px) rotateX(0deg) rotateY(30deg) rotateZ(0deg) translateX(0px) translateY(-30px) translateZ(0px);
+}
+
+.acor img:hover{
+  transition: all ease 1250ms;
+}
+
+.acor img:hover{
+  transform: perspective(200px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(30px) translateY(0px) translateZ(50px);
+}
+
+/*FIN ACORDEON*/
+
+.btnAcordeon {
+    background-color: #1d2227;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+
+    transform:scale(1.2);
+    -moz-transform:scale(1.2);
+    -moz-transition: all 500ms ease-in-out;
+}
+
+.active, .btnAcordeon:hover {
+    box-shadow: inset 0 0 20px rgba(233, 2, 2, 0.212), 0 0 20px rgba(233, 2, 2, 0.212);
+    outline-color: rgba(49, 138, 172, 0);
+    outline-offset: 80px;
+    text-shadow: 1px 1px 6px rgb(185, 9, 9);
+    transform:scale(1.2);
+    -moz-transform:scale(1);
+}
+
+/*FIN EFECTOS ACORDEON*/
+
+.formulario{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background-image: url(../images/formulario.jpg);
+    background-attachment: fixed; 
+    background-size: cover;
+    overflow: hidden;
+}
+
+h5{
+  color: wheat;
+}
+
+.formE{
+  top: 20px;
+}
+
+.botonFormulario{
+  margin: 10px;
+}
+
+.formMove{
+    top: 40%;
+    left: -75%;
+    overflow: hidden;
+    position: absolute;
+    background-size: contain;
+}
+
+div.container{
+    background-color: #1d2227;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Imagenes de Historia*/
+div img{
+    margin: 5px;
+}
+
+/*INICIO FORMULARIO*/
+
+/*diseño de formulario*/
+
+form {
+    text-align: center;
+    background-color: rgb(39, 39, 38);
+    border: 1px solid #4A4A4A;
+    padding: 30px;
+}
+
+label {
+    letter-spacing: 4px;
+    padding-top: 30px;
+    text-align: center;
+}
+
+/* animación para que el texto flote hacia arriba */
+
+label .label-text {
+    color: #9B9B9B;
+    font-size: 15px;
+    line-height: 20px;
+    text-transform: uppercase;
+    -moz-transform: translateY(-34px);
+    -ms-transform: translateY(-34px);
+    -webkit-transform: translateY(-34px);
+    transform: translateY(-34px);
+    transition: all 0.3s;
+}
+
+/* eliminar el estilo del cuadro de entrada */
+label input {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid #4A4A4A;
+    color: white;
+    font-size: 20px;
+    letter-spacing: 1px;
+    outline: 0;
+    padding: 5px 20px;
+    text-align: center;
+    transition: all 0.3s;
+    width: 200px;
+}
+
+/* una vez que hace clic en la entrada, el cuadro de ancho de entrada se anima */
+
+label input:focus {
+    max-width: 100%;
+    width: 400px;
+}
+
+/* El texto flota y se vuelve blanca */
+
+label input:focus + .label-text {
+    color: #F0F0F0;
+    font-size: 13px;
+    margin-top: 10px;
+    -moz-transform: translateY(-74px);
+    -ms-transform: translateY(-74px);
+    -webkit-transform: translateY(-74px);
+    transform: translateY(-74px);
+}
+
+/* el texto flota durante la validación del formulario */
+
+label input:valid + .label-text {
+    font-size: 13px;
+    -moz-transform: translateY(-74px);
+    -ms-transform: translateY(-74px);
+    -webkit-transform: translateY(-74px);
+    transform: translateY(-74px);
+}
+
+/* estilo de botón */
+
+.buttonF{
+    background-color: rgba(0,0,0,0.5);
+    color: #9B9B9B;
+    border-color:  #4A4A4A;
+    height: 8mm;
+    width: 25%;
+}
+
+.buttonF.animate {
+    -webkit-animation: jello-horizontal 0.5s both;
+    animation: jello-horizontal 0.5s both;
+}
+
+@keyframes jello-horizontal {
+      0% {
+        -webkit-transform: scale3d(1, 1, 1);
+              transform: scale3d(1, 1, 1);
+      }
+      30% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+              transform: scale3d(1.25, 0.75, 1);
+      }
+      40% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+              transform: scale3d(0.75, 1.25, 1);
+      }
+      50% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+              transform: scale3d(1.15, 0.85, 1);
+      }
+      65% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+              transform: scale3d(0.95, 1.05, 1);
+      }
+      75% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+              transform: scale3d(1.05, 0.95, 1);
+      }
+      100% {
+        -webkit-transform: scale3d(1, 1, 1);
+              transform: scale3d(1, 1, 1);
+      }
+  }
+
+/*FIN FORMULARIO*/
